@@ -1,0 +1,20 @@
+{
+    "todos": [
+        {
+            "id": "0",
+            "task": "Agregar un footer"
+        },
+        {
+            "id": "1",
+            "task": "Cambiar el login"
+        },
+        {
+            "id": "2",
+            "task": "Actualizar las rutas"
+        },
+        {
+            "id": "3",
+            "task": "Instalar los modulos"
+        }
+    ]
+}
