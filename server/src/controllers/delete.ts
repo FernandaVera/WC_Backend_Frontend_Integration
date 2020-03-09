@@ -10,5 +10,5 @@ export default (req: Request, res: Response) => {
     }
     
     todos.splice(index, 1);
-    res.sendStatus(200);
+    res.status(200).json(todos);
 };

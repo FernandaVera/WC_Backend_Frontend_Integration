@@ -1,0 +1,9 @@
+.login-form {
+    background: #9053c7;
+    background: -webkit-linear-gradient(-135deg,#c850c0,#4158d0);
+}
+
+.login-form a {
+    display: block;
+    font-size: 12px;
+}
