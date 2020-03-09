@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import "./styles.css";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { removeCurrentUser } from '../../redux/actions/sessionActions';
 
-export default class listar extends Component {
+class listar extends Component {
 
     constructor(props) {
         super(props)
@@ -14,6 +16,8 @@ export default class listar extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.session);
+
         axios.get("http://localhost:9000/todos/list")
             .then(todos => this.setState({ todos: todos.data }))
             .catch(err => console.log(err));
@@ -25,6 +29,11 @@ export default class listar extends Component {
             .then(todos => this.setState({ todos: todos.data }))
             .catch(err => console.log(err));
     }
+
+    logout = () => {
+        this.props.removeCurrentUser();
+        this.props.history.push('/');
+    }
     
     render() {
 
@@ -33,7 +42,7 @@ export default class listar extends Component {
         return (
             <div className="linear-background list-items-table">
                 <Link to="/create" className="createBtn btn btn-primary">Add new ToDo</Link>
-                <Link to="/" className="logoutBtn btn btn-info">Logout</Link>
+                <button className="logoutBtn btn btn-info" onClick={this.logout}>Logout</button>
                <div className="card-wrapper">
                     <div className="card-content">
                         <table className="table">
@@ -66,3 +75,15 @@ export default class listar extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+    removeCurrentUser
+}
+
+const mapStateToProps = (state) => {
+    return {
+        session: state.session
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(listar);

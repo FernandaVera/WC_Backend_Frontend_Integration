@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './styles.css';
+import { setCurrentUser } from '../../redux/actions/sessionActions';
+import { connect } from 'react-redux';
 
-export default class login extends Component {
+class login extends Component {
 
     constructor(props) {
         super(props)
@@ -23,6 +25,7 @@ export default class login extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
+        this.props.setCurrentUser(this.state);
         this.props.history.push('/home');
     }
     
@@ -36,10 +39,10 @@ export default class login extends Component {
                      <form onSubmit={this.onSubmit}>
                         <h5 className="mb-5">Welcome to example app :D</h5>
                         <div className="input-group mb-3">
-                            <input onChange={this.onChange} value={user} type="text" className="form-control" placeholder="Username" name="user" />
+                            <input required onChange={this.onChange} value={user} type="text" className="form-control" placeholder="Username" name="user" />
                         </div>
                         <div className="input-group mb-4">
-                            <input onChange={this.onChange} value={password} type="text" className="form-control" placeholder="Password" name="password" />
+                            <input required onChange={this.onChange} value={password} type="text" className="form-control" placeholder="Password" name="password" />
                         </div>
                         <button type="submit" className="btn btn-success mb-3">Login</button>
                         <Link to ="/recover">Forgot password? Click here!</Link>
@@ -50,3 +53,9 @@ export default class login extends Component {
         )
     }
 }
+
+const mapDispatchToProps = {
+    setCurrentUser
+}
+
+export default connect(null, mapDispatchToProps)(login);

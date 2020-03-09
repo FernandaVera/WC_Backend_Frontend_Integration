@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import "./styles.css";
+import { connect } from 'react-redux';
 import axios from 'axios';
  
-export default class crear extends Component {
+class crear extends Component {
 
     constructor(props) {
         super(props)
@@ -11,6 +12,10 @@ export default class crear extends Component {
         this.state = {
             task: ""
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props.session);
     }
 
     onChange = (e) => {
@@ -59,3 +64,11 @@ export default class crear extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        session: state.session
+    }
+};
+
+export default connect(mapStateToProps)(crear);
